@@ -27,6 +27,15 @@ public class GameTest {
         assertEquals(20, game.score());
     }
 
+    @Test
+    public void test_one_spare() throws Exception {
+        game.roll(5);
+        game.roll(5); // Spare
+        rollMany(18, 1);
+
+        assertEquals(29, game.score());
+    }
+
     private void rollMany(int rolls, int pins) {
         for(int i = 0; i<rolls; i++) {
             game.roll(pins);
