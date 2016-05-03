@@ -29,11 +29,41 @@ public class GameTest {
 
     @Test
     public void test_one_spare() throws Exception {
-        game.roll(5);
-        game.roll(5); // Spare
+        rollSpare();
         rollMany(18, 1);
 
         assertEquals(29, game.score());
+    }
+
+    @Test
+    public void test_one_strike() throws Exception {
+        rollStrike();
+        game.roll(5);
+        rollMany(17, 1);
+        assertEquals(38, game.score());
+    }
+
+    @Test
+    public void test_strike_and_spare() throws Exception {
+        rollStrike();
+        rollSpare();
+        rollMany(16, 1);
+        assertEquals(47, game.score());
+    }
+
+    @Test
+    public void test_all_strikes() throws Exception {
+        rollMany(20, 10);
+        assertEquals(300, game.score());
+    }
+
+    private void rollStrike() {
+        game.roll(10);
+    }
+
+    private void rollSpare() {
+        game.roll(5);
+        game.roll(5);
     }
 
     private void rollMany(int rolls, int pins) {
